@@ -3,8 +3,8 @@
 %bcond_without	tests	# do not perform "make test"
 #
 %include	/usr/lib/rpm/macros.perl
-%define	pdir	Mail
-%define	pnam	SRS
+%define		pdir	Mail
+%define		pnam	SRS
 Summary:	Mail::SRS - Perl implementation of SRS
 Summary(pl):	Mail::SRS - perlowa implementacja SRS
 Name:		perl-Mail-SRS
