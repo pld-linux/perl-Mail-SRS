@@ -8,13 +8,13 @@
 Summary:	Mail::SRS - Perl implementation of SRS
 Summary(pl):	Mail::SRS - perlowa implementacja SRS
 Name:		perl-Mail-SRS
-Version:	0.27
+Version:	0.29
 Release:	0.1
 # Same as perl
 License:	GPL/Artistic
 Group:		Development/Languages/Perl
 Source0:	http://www.anarres.org/projects/srs/%{pdir}-%{pnam}-%{version}.tar.gz
-# Source0-md5:	2edcaddd5c2d54c3b6a05262930864d6
+# Source0-md5:	7fa28a25373be423b6a0577dd4ea557d
 Source1:	srsd.init
 URL:		http://www.anarres.org/projects/srs/
 BuildRequires:	perl-devel >= 1:5.8.0
@@ -58,23 +58,25 @@ install -d $RPM_BUILD_ROOT/etc/rc.d/init.d
 	DESTDIR=$RPM_BUILD_ROOT
 
 install %{SOURCE1} $RPM_BUILD_ROOT/etc/rc.d/init.d/srsd
+touch $RPM_BUILD_ROOT/%{_sysconfdir}/srsd.secret
+touch $RPM_BUILD_ROOT/%{_sysconfdir}/srsd.secret.1
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
 %post -n srsd
+if [ ! -f /etc/srsd.secret ] ; then
+        echo "Generating SRS secret..."
+        umask 066
+        perl -e 'open R,"/dev/urandom"; read R,$r,16;
+                 printf "%02x",ord(chop $r) while($r);' > /etc/srsd.secret
+fi
 /sbin/chkconfig --add srsd
 umask 137
 if [ -f /var/lock/subsys/srsd ]; then
         /etc/rc.d/init.d/srsd restart 1>&2
 else
         echo "Run \"/etc/rc.d/init.d/srsd start\" to start SRS daemon."
-fi
-if [ ! -f /etc/srsd.secret ] ; then
-        echo "Generating SRS secret..."
-        umask 066
-        perl -e 'open R,"/dev/urandom"; read R,$r,16;
-                 printf "%02x",ord(chop $r) while($r);' > /etc/srsd.secret
 fi
 
  
