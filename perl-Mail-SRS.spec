@@ -8,13 +8,13 @@
 Summary:	Mail::SRS - Perl implementation of SRS
 Summary(pl):	Mail::SRS - perlowa implementacja SRS
 Name:		perl-Mail-SRS
-Version:	0.30
+Version:	0.31
 Release:	1
 # same as perl
 License:	GPL v1+ or Artistic
 Group:		Development/Languages/Perl
 Source0:	http://www.anarres.org/projects/srs/%{pdir}-%{pnam}-%{version}.tar.gz
-# Source0-md5:	042c49598e0a71b8dfeb78d9e642e032
+# Source0-md5:	1440999563a7b25d5fb03204b03e1060
 Source1:	srsd.init
 URL:		http://www.anarres.org/projects/srs/
 BuildRequires:	perl-DB_File 
