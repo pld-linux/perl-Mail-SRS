@@ -70,6 +70,13 @@ if [ -f /var/lock/subsys/srsd ]; then
 else
         echo "Run \"/etc/rc.d/init.d/srsd start\" to start SRS daemon."
 fi
+if [ ! -f /etc/srsd.secret ] ; then
+        echo "Generating SRS secret..."
+        umask 066
+        perl -e 'open R,"/dev/urandom"; read R,$r,16;
+                 printf "%02x",ord(chop $r) while($r);' > /etc/srsd.secret
+fi
+
  
 %preun -n srsd
 if [ "$1" = "0" ]; then
@@ -93,13 +100,5 @@ fi
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/srsd
 %attr(754,root,root) /etc/rc.d/init.d/srsd
-%ghost %config /etc/srsd.secret
-%ghost %config /etc/srsd.secret.1
-
-%post -n srsd
-if [ ! -f /etc/srsd.secret ] ; then
-        echo "Generating SRS secret..."
-        umask 066
-        perl -e 'open R,"/dev/urandom"; read R,$r,16;
-                 printf "%02x",ord(chop $r) while($r);' > /etc/srsd.secret
-fi
+%attr(600,root,root) %ghost %{_sysconfdir}/srsd.secret
+%attr(600,root,root) %ghost %{_sysconfdir}/srsd.secret.1
