@@ -17,28 +17,38 @@ Source0:	http://www.anarres.org/projects/srs/%{pdir}-%{pnam}-%{version}.tar.gz
 # Source0-md5:	7fa28a25373be423b6a0577dd4ea557d
 Source1:	srsd.init
 URL:		http://www.anarres.org/projects/srs/
-BuildRequires:	perl-devel >= 1:5.8.0
-BuildRequires:	rpm-perlprov >= 4.1-13
 BuildRequires:	perl-DB_File 
 BuildRequires:	perl-Digest-HMAC
 BuildRequires:	perl-MLDBM
 BuildRequires:	perl-Storable
+BuildRequires:	perl-devel >= 1:5.8.0
+BuildRequires:	rpm-perlprov >= 4.1-13
 BuildArch:	noarch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
-This module implements a library to rewrite sender addresses according to the
-SRS rewritign scheme, to let forwarders work in a sender-authenticated SMTP
-world
+This module implements a library to rewrite sender addresses according
+to the SRS rewriting scheme, to let forwarders work in a
+sender-authenticated SMTP world.
+
+%description -l pl
+Ten modu³ jest implementacj± biblioteki przepisuj±cej adresy nadawcy
+zgodnie ze schematem przepisywania SRS, aby pozwoliæ przekazuj±cym
+dzia³aæ w ¶wiecie z SMTP z uwierzytelnieniem nadawcy.
 
 %package -n srsd
 Summary:	SRS address rewriting daemon
+Summary(pl):	Demon przepisuj±cy adresy SRS
 Group:		Networking/Daemons
 Requires:	%{name} = %{version}-%{release}
 
 %description -n srsd
 SRS address rewriting daemon, operating as a local process on
 UNIX-domain sockets.
+
+%description -n srsd -l pl
+Demon przepisuj±cy adresy SRS, dzia³aj±cy jako lokalny proces na
+gniazdach uniksowych.
 
 %prep
 %setup -q -n %{pdir}-%{pnam}-%{version}
