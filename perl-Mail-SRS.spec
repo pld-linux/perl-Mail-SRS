@@ -9,7 +9,7 @@ Summary:	Mail::SRS - Perl implementation of SRS
 Summary(pl):	Mail::SRS - perlowa implementacja SRS
 Name:		perl-Mail-SRS
 Version:	0.30
-Release:	0.2
+Release:	1
 # same as perl
 License:	GPL v1+ or Artistic
 Group:		Development/Languages/Perl
