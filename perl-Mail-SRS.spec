@@ -39,6 +39,8 @@ dzia³aæ w ¶wiecie z SMTP z uwierzytelnieniem nadawcy.
 Summary:	SRS address rewriting daemon
 Summary(pl):	Demon przepisuj±cy adresy SRS
 Group:		Networking/Daemons
+PreReq:		rc-scripts
+Requires(post,postun):	/sbin/chkconfig
 Requires:	%{name} = %{version}-%{release}
 
 %description -n srsd
