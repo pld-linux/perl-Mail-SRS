@@ -14,10 +14,17 @@
 . /etc/sysconfig/network
 
 # set defaults
-SPFD_USER="nobody"
-SPFD_GROUP="nobody"
-SPFD_SOCKET="/var/run/srsd.socket"
-OPTIONS=''
+SRSD_SECRET="/etc/srsd.secret"
+SRSD_OLDSECRET="/etc/srsd.secret.1"
+SRSD_OPTIONS=''
+
+if [ -f "$SRSD_OLDSECRET" ]; then
+	SRSD_OPTIONS="$SRSD_OPTIONS --secretfile=$SRSD_OLDSECRET"
+fi
+
+if [ -f "$SRSD_SECRET" ]; then
+	SRSD_OPTIONS="$SRSD_OPTIONS --secretfile=$SRSD_SECRET"
+fi
 
 # Get service config
 [ -f /etc/sysconfig/srsd ] && . /etc/sysconfig/srsd
@@ -40,7 +47,7 @@ case "$1" in
 	# Check if the service is already running?
 	if [ ! -f /var/lock/subsys/srsd ]; then
 		msg_starting srs
-		daemon srsd $OPTIONS -pathuser="$SPFD_USER" -pathgroup="$SPFD_GROUP" -path="$SPFD_SOCKET" -pathmode=666 &
+		daemon sh -c "srsd $SRSD_OPTIONS &"
 		RETVAL=$?
 		[ $RETVAL -eq 0 ] && touch /var/lock/subsys/srsd
 	else
