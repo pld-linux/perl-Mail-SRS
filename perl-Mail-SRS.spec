@@ -75,31 +75,31 @@ rm -rf $RPM_BUILD_ROOT
 
 %post -n srsd
 if [ ! -f /etc/srsd.secret ] ; then
-        echo "Generating SRS secret..."
-        umask 066
-        perl -e 'open R,"/dev/urandom"; read R,$r,16;
-                 printf "%02x",ord(chop $r) while($r);' > /etc/srsd.secret
+	echo "Generating SRS secret..."
+	umask 066
+	perl -e 'open R,"/dev/urandom"; read R,$r,16;
+		printf "%02x",ord(chop $r) while($r);' > /etc/srsd.secret
 fi
 /sbin/chkconfig --add srsd
 umask 137
 if [ -f /var/lock/subsys/srsd ]; then
-        /etc/rc.d/init.d/srsd restart 1>&2
+	/etc/rc.d/init.d/srsd restart 1>&2
 else
-        echo "Run \"/etc/rc.d/init.d/srsd start\" to start SRS daemon."
+	echo "Run \"/etc/rc.d/init.d/srsd start\" to start SRS daemon."
 fi
 
  
 %preun -n srsd
 if [ "$1" = "0" ]; then
-        if [ -f /var/lock/subsys/srsd ]; then
-                /etc/rc.d/init.d/srsd stop 1>&2
-        fi
-        /sbin/chkconfig --del srsd
+	if [ -f /var/lock/subsys/srsd ]; then
+		/etc/rc.d/init.d/srsd stop 1>&2
+	fi
+	/sbin/chkconfig --del srsd
 fi
 
 %files
 %defattr(644,root,root,755)
-%doc README.pobox  eg  TODO README
+%doc README.pobox eg TODO README
 %attr(755,root,root) %{_bindir}/srs
 %dir %{perl_vendorlib}/Mail/SRS
 %{perl_vendorlib}/Mail/SRS/*.pm
