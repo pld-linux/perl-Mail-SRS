@@ -69,8 +69,8 @@ install -d $RPM_BUILD_ROOT/etc/rc.d/init.d
 	DESTDIR=$RPM_BUILD_ROOT
 
 install %{SOURCE1} $RPM_BUILD_ROOT/etc/rc.d/init.d/srsd
-touch $RPM_BUILD_ROOT/%{_sysconfdir}/srsd.secret
-touch $RPM_BUILD_ROOT/%{_sysconfdir}/srsd.secret.1
+touch $RPM_BUILD_ROOT%{_sysconfdir}/srsd.secret
+touch $RPM_BUILD_ROOT%{_sysconfdir}/srsd.secret.1
 
 %clean
 rm -rf $RPM_BUILD_ROOT
