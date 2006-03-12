@@ -17,11 +17,12 @@ Source0:	http://www.anarres.org/projects/srs/%{pdir}-%{pnam}-%{version}.tar.gz
 # Source0-md5:	1440999563a7b25d5fb03204b03e1060
 Source1:	srsd.init
 URL:		http://www.anarres.org/projects/srs/
-BuildRequires:	perl-DB_File 
+BuildRequires:	perl-DB_File
 BuildRequires:	perl-Digest-HMAC
 BuildRequires:	perl-MLDBM
 BuildRequires:	perl-devel >= 1:5.8.0
 BuildRequires:	rpm-perlprov >= 4.1-13
+BuildRequires:	rpmbuild(macros) >= 1.268
 BuildArch:	noarch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -39,9 +40,10 @@ dzia³aæ w ¶wiecie z SMTP z uwierzytelnieniem nadawcy.
 Summary:	SRS address rewriting daemon
 Summary(pl):	Demon przepisuj±cy adresy SRS
 Group:		Networking/Daemons
-PreReq:		rc-scripts
+Requires(post):	/usr/bin/perl
 Requires(post,postun):	/sbin/chkconfig
 Requires:	%{name} = %{version}-%{release}
+Requires:	rc-scripts
 
 %description -n srsd
 SRS address rewriting daemon, operating as a local process on
@@ -83,19 +85,11 @@ if [ ! -f /etc/srsd.secret ] ; then
 		printf "%02x",ord(chop $r) while($r);' > /etc/srsd.secret
 fi
 /sbin/chkconfig --add srsd
-umask 137
-if [ -f /var/lock/subsys/srsd ]; then
-	/etc/rc.d/init.d/srsd restart 1>&2
-else
-	echo "Run \"/etc/rc.d/init.d/srsd start\" to start SRS daemon."
-fi
+%service srsd restart "SRS daemon"
 
- 
 %preun -n srsd
 if [ "$1" = "0" ]; then
-	if [ -f /var/lock/subsys/srsd ]; then
-		/etc/rc.d/init.d/srsd stop 1>&2
-	fi
+	%service srsd stop
 	/sbin/chkconfig --del srsd
 fi
 
