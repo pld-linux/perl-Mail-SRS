@@ -41,7 +41,7 @@ Summary:	SRS address rewriting daemon
 Summary(pl):	Demon przepisuj±cy adresy SRS
 Group:		Networking/Daemons
 Requires(post):	/usr/bin/perl
-Requires(post,postun):	/sbin/chkconfig
+Requires(post,preun):	/sbin/chkconfig
 Requires:	%{name} = %{version}-%{release}
 Requires:	rc-scripts
 
@@ -78,11 +78,11 @@ touch $RPM_BUILD_ROOT%{_sysconfdir}/srsd.secret.1
 rm -rf $RPM_BUILD_ROOT
 
 %post -n srsd
-if [ ! -f /etc/srsd.secret ] ; then
+if [ ! -f %{_sysconfdir}/srsd.secret ] ; then
 	echo "Generating SRS secret..."
 	umask 066
 	perl -e 'open R,"/dev/urandom"; read R,$r,16;
-		printf "%02x",ord(chop $r) while($r);' > /etc/srsd.secret
+		printf "%02x",ord(chop $r) while($r);' > %{_sysconfdir}/srsd.secret
 fi
 /sbin/chkconfig --add srsd
 %service srsd restart "SRS daemon"
