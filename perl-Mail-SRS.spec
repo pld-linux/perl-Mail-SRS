@@ -6,7 +6,7 @@
 %define		pdir	Mail
 %define		pnam	SRS
 Summary:	Mail::SRS - Perl implementation of SRS
-Summary(pl):	Mail::SRS - perlowa implementacja SRS
+Summary(pl.UTF-8):   Mail::SRS - perlowa implementacja SRS
 Name:		perl-Mail-SRS
 Version:	0.31
 Release:	2
@@ -31,14 +31,14 @@ This module implements a library to rewrite sender addresses according
 to the SRS rewriting scheme, to let forwarders work in a
 sender-authenticated SMTP world.
 
-%description -l pl
-Ten modu³ jest implementacj± biblioteki przepisuj±cej adresy nadawcy
-zgodnie ze schematem przepisywania SRS, aby pozwoliæ przekazuj±cym
-dzia³aæ w ¶wiecie z SMTP z uwierzytelnieniem nadawcy.
+%description -l pl.UTF-8
+Ten moduÅ‚ jest implementacjÄ… biblioteki przepisujÄ…cej adresy nadawcy
+zgodnie ze schematem przepisywania SRS, aby pozwoliÄ‡ przekazujÄ…cym
+dziaÅ‚aÄ‡ w Å›wiecie z SMTP z uwierzytelnieniem nadawcy.
 
 %package -n srsd
 Summary:	SRS address rewriting daemon
-Summary(pl):	Demon przepisuj±cy adresy SRS
+Summary(pl.UTF-8):   Demon przepisujÄ…cy adresy SRS
 Group:		Networking/Daemons
 Requires(post):	/usr/bin/perl
 Requires(post,preun):	/sbin/chkconfig
@@ -49,8 +49,8 @@ Requires:	rc-scripts
 SRS address rewriting daemon, operating as a local process on
 UNIX-domain sockets.
 
-%description -n srsd -l pl
-Demon przepisuj±cy adresy SRS, dzia³aj±cy jako lokalny proces na
+%description -n srsd -l pl.UTF-8
+Demon przepisujÄ…cy adresy SRS, dziaÅ‚ajÄ…cy jako lokalny proces na
 gniazdach uniksowych.
 
 %prep
