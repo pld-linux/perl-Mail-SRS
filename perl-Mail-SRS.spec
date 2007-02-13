@@ -6,7 +6,7 @@
 %define		pdir	Mail
 %define		pnam	SRS
 Summary:	Mail::SRS - Perl implementation of SRS
-Summary(pl.UTF-8):   Mail::SRS - perlowa implementacja SRS
+Summary(pl.UTF-8):	Mail::SRS - perlowa implementacja SRS
 Name:		perl-Mail-SRS
 Version:	0.31
 Release:	2
@@ -38,7 +38,7 @@ działać w świecie z SMTP z uwierzytelnieniem nadawcy.
 
 %package -n srsd
 Summary:	SRS address rewriting daemon
-Summary(pl.UTF-8):   Demon przepisujący adresy SRS
+Summary(pl.UTF-8):	Demon przepisujący adresy SRS
 Group:		Networking/Daemons
 Requires(post):	/usr/bin/perl
 Requires(post,preun):	/sbin/chkconfig
