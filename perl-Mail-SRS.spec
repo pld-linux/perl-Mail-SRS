@@ -2,7 +2,6 @@
 # Conditional build:
 %bcond_without	tests	# do not perform "make test"
 #
-%include	/usr/lib/rpm/macros.perl
 %define		pdir	Mail
 %define		pnam	SRS
 Summary:	Mail::SRS - Perl implementation of SRS
